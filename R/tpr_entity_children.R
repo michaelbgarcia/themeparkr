@@ -24,7 +24,6 @@
 #'
 #' @export
 tpr_entity_children = function(park) {
-  #browser()
   path = glue::glue("v1/entity/{park}/children")
   url = httr::modify_url("https://api.themeparks.wiki", path = path)
   resp = httr::GET(url)
