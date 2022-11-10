@@ -6,7 +6,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr flatten
 #' @importFrom tidyr unnest_wider
-#' @importFrom dplyr bind_rows any_of
+#' @importFrom dplyr bind_rows any_of glimpse
 #'
 #' @return an object of class `themeparks_api`
 #'
