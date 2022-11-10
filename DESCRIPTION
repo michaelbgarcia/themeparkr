@@ -1,0 +1,21 @@
+Package: themeparkr
+Type: Package
+Title: R API Wrapper for the themeparksapi
+Version: 0.1.0
+Author: Michael B. Garcia
+Maintainer: Michael B. Garcia <michaelbgarcia@gmail.com>
+Description: The package provides R functions to query real-time data for 
+    theme parks as documented on https://themeparks.wiki/.
+Encoding: UTF-8
+License: MIT + file LICENSE
+LazyData: true
+RoxygenNote: 7.2.1
+Imports: 
+    magrittr,
+    httr,
+    jsonlite,
+    purrr,
+    tidyr,
+    dplyr,
+    tibble,
+    glue
