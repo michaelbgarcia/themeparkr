@@ -1,8 +1,7 @@
 ## code to prepare `tpr_datasets_cache` datasets goes here
 
 # destinations
-tpr_destinations_data = purrr::map_dfr(.x = tpr_destinations()$content$id[[1]],
-               .f = ~tpr_entity_live(.x) %>% purrr::pluck("content"))
+tpr_destinations_data = tpr_destinations()$content
 usethis::use_data(tpr_destinations_data, overwrite = TRUE)
 
 # entity
