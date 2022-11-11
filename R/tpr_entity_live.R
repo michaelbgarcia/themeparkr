@@ -31,7 +31,7 @@ tpr_entity_live = function(park) {
   parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
   parsed = parsed %>%
     purrr::pluck("liveData")
-  parsed = parsed %>%
+  parsed =
     tibble(
       id = map_chr(parsed, pluck, "id", .default = NA_character_),
       name = map_chr(parsed, pluck, "name", .default = NA_character_),
@@ -42,7 +42,7 @@ tpr_entity_live = function(park) {
       status = map_chr(parsed, pluck, "status", .default = NA_character_),
       forecast = map(parsed,pluck,"forecast", .default = NA),
       showtimes = map(parsed, pluck, "showtimes", .default = NA),
-      lastUpparseded = map_chr(parsed, pluck, "lastUpparseded", .default = NA_character_)
+      lastUpdated = map_chr(parsed, pluck, "lastUpdated", .default = NA_character_)
     ) %>%
     dplyr::mutate(park = park) %>%
     dplyr::relocate(park, .before = dplyr::everything())
