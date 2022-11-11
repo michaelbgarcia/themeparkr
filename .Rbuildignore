@@ -4,3 +4,4 @@
 ^\.Rproj\.user$
 ^inst/scratch
 ^LICENSE\.md$
+^data-raw$
