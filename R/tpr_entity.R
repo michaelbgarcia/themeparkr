@@ -3,12 +3,10 @@
 #' @description Get the full data document for a given entity from 'https://api.themeparks.wiki/'.
 #'     You can supply either a GUID or slug string.
 #'
-#' @param park GUID or slug string for the entity of interest from `tpr_destinations()`
+#' @param id GUID or slug string for the entity of interest
 #' @importFrom httr modify_url GET content
 #' @importFrom jsonlite fromJSON
-#' @importFrom dplyr any_of
-#' @importFrom tidyr nest
-#' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble_row
 #' @importFrom glue glue
 #'
 #' @return an object of class `themeparks_api`
@@ -23,14 +21,15 @@
 #'
 #'
 #' @export
-tpr_entity = function(park) {
-  path = glue::glue("v1/entity/{park}")
+tpr_entity = function(id) {
+  path = glue::glue("v1/entity/{id}")
   url = httr::modify_url("https://api.themeparks.wiki", path = path)
   resp = httr::GET(url)
-  parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
+  parsed = jsonlite::fromJSON(httr::content(resp, "text"),
+                              simplifyVector = FALSE)
   parsed = parsed %>%
-    tibble::as_tibble() %>%
-    tidyr::nest(location = any_of("location"))
+    purrr::modify_if(is.list, list) %>%
+    tibble::as_tibble_row()
 
   structure(
     list(

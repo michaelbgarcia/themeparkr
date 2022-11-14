@@ -4,10 +4,10 @@
 \alias{tpr_entity}
 \title{Get entity details}
 \usage{
-tpr_entity(park)
+tpr_entity(id)
 }
 \arguments{
-\item{park}{GUID or slug string for the entity of interest from `tpr_destinations()`}
+\item{id}{GUID or slug string for the entity of interest}
 }
 \value{
 an object of class `themeparks_api`

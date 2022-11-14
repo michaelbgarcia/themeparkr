@@ -4,10 +4,10 @@
 \alias{tpr_entity_live}
 \title{Get live entity details}
 \usage{
-tpr_entity_live(park)
+tpr_entity_live(id)
 }
 \arguments{
-\item{park}{GUID or slug string for the entity of interest from `tpr_destinations()`}
+\item{id}{GUID or slug string for the entity of interest}
 }
 \value{
 an object of class `themeparks_api`

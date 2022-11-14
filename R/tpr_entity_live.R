@@ -3,11 +3,10 @@
 #' @description Get live data (queue times, parade times, etc.) as well as all
 #'     child entities on 'https://api.themeparks.wiki/'.
 #'
-#' @param park GUID or slug string for the entity of interest from `tpr_destinations()`
+#' @param id GUID or slug string for the entity of interest
 #' @importFrom httr modify_url GET content
 #' @importFrom purrr pluck map_chr map
 #' @importFrom jsonlite fromJSON
-#' @importFrom dplyr mutate relocate everything
 #' @importFrom glue glue
 #' @importFrom tibble tibble
 #'
@@ -24,8 +23,8 @@
 #'
 #'
 #' @export
-tpr_entity_live = function(park) {
-  path = glue::glue("v1/entity/{park}/live")
+tpr_entity_live = function(id) {
+  path = glue::glue("v1/entity/{id}/live")
   url = httr::modify_url("https://api.themeparks.wiki", path = path)
   resp = httr::GET(url)
   parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
@@ -43,10 +42,7 @@ tpr_entity_live = function(park) {
       forecast = map(parsed,pluck,"forecast", .default = NA),
       showtimes = map(parsed, pluck, "showtimes", .default = NA),
       lastUpdated = map_chr(parsed, pluck, "lastUpdated", .default = NA_character_)
-    ) %>%
-    dplyr::mutate(park = park) %>%
-    dplyr::relocate(park, .before = dplyr::everything())
-
+    )
 
   structure(
     list(

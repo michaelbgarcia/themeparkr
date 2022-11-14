@@ -7,7 +7,7 @@
 tpr_entity_children(park)
 }
 \arguments{
-\item{park}{GUID or slug string for the entity of interest from `tpr_destinations()`}
+\item{park}{GUID or slug string for the entity of interest}
 }
 \value{
 an object of class `themeparks_api`

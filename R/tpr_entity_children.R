@@ -3,7 +3,7 @@
 #' @description Get a list of all the children that belong an entity on
 #'     'https://api.themeparks.wiki/'.
 #'
-#' @param park GUID or slug string for the entity of interest from `tpr_destinations()`
+#' @param park GUID or slug string for the entity of interest
 #' @importFrom httr modify_url GET content
 #' @importFrom purrr pluck map_dfr
 #' @importFrom jsonlite fromJSON
