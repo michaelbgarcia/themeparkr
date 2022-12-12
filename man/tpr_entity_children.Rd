@@ -10,7 +10,7 @@ tpr_entity_children(park)
 \item{park}{GUID or slug string for the entity of interest}
 }
 \value{
-an object of class `themeparks_api`
+a tibble
 }
 \description{
 Get a list of all the children that belong an entity on
@@ -21,8 +21,8 @@ This is recursive, so a destination will
    return all parks and all rides within those parks.
 }
 \examples{
-purrr::map_dfr(tpr_destinations()$content$id[[1]],
-    ~tpr_entity_children(.x) \%>\% purrr::pluck("content"))
+park_dest = tpr_destinations()$id[[1]]
+tpr_entity_children(park_dest)
 
 
 

@@ -10,7 +10,7 @@ tpr_entity_live(id)
 \item{id}{GUID or slug string for the entity of interest}
 }
 \value{
-an object of class `themeparks_api`
+a tibble
 }
 \description{
 Get live data (queue times, parade times, etc.) as well as all
@@ -21,8 +21,8 @@ This is recursive, so a destination will
    return detais for all parks and all rides within those parks.
 }
 \examples{
-purrr::map_dfr(tpr_destinations()$content$id[[1]],
-    ~tpr_entity_live(.x) \%>\% purrr::pluck("content"))
+park_dest = tpr_destinations()$id[[1]]
+tpr_entity_live(park_dest)
 
 
 

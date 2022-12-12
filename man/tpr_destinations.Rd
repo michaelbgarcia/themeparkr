@@ -7,7 +7,7 @@
 tpr_destinations()
 }
 \value{
-an object of class `themeparks_api`
+a tibble
 }
 \description{
 Get a list of supported destinations available on 'https://api.themeparks.wiki/'.

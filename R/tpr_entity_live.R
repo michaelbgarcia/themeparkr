@@ -4,21 +4,21 @@
 #'     child entities on 'https://api.themeparks.wiki/'.
 #'
 #' @param id GUID or slug string for the entity of interest
-#' @importFrom httr modify_url GET content
+#' @importFrom httr modify_url GET content stop_for_status
 #' @importFrom purrr pluck map_chr map
 #' @importFrom jsonlite fromJSON
 #' @importFrom glue glue
 #' @importFrom tibble tibble
 #'
-#' @return an object of class `themeparks_api`
+#' @return a tibble
 #'
 #' @details
 #' This is recursive, so a destination will
 #'    return detais for all parks and all rides within those parks.
 #'
 #' @examples
-#' purrr::map_dfr(tpr_destinations()$content$id[[1]],
-#'     ~tpr_entity_live(.x) %>% purrr::pluck("content"))
+#' park_dest = tpr_destinations()$id[[1]]
+#' tpr_entity_live(park_dest)
 #'
 #'
 #'
@@ -27,6 +27,7 @@ tpr_entity_live = function(id) {
   path = glue::glue("v1/entity/{id}/live")
   url = httr::modify_url("https://api.themeparks.wiki", path = path)
   resp = httr::GET(url)
+  httr::stop_for_status(resp, "get live data")
   parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
   parsed = parsed %>%
     purrr::pluck("liveData")
@@ -44,12 +45,5 @@ tpr_entity_live = function(id) {
       lastUpdated = map_chr(parsed, pluck, "lastUpdated", .default = NA_character_)
     )
 
-  structure(
-    list(
-      content = parsed,
-      path = path,
-      response = resp
-    ),
-    class = "themeparks_api"
-  )
+  return(parsed)
 }

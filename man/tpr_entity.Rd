@@ -10,7 +10,7 @@ tpr_entity(id)
 \item{id}{GUID or slug string for the entity of interest}
 }
 \value{
-an object of class `themeparks_api`
+a tibble
 }
 \description{
 Get the full data document for a given entity from 'https://api.themeparks.wiki/'.
@@ -20,8 +20,8 @@ Get the full data document for a given entity from 'https://api.themeparks.wiki/
 This provides both the response and parsed results from the `/entity/{entityID}` path.
 }
 \examples{
-park_dest = tpr_destinations()
-tpr_entity(park_dest$content$id[[1]])
+park_dest = tpr_destinations()$id[[1]]
+tpr_entity(park_dest)
 
 
 
