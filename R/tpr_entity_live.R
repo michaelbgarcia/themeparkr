@@ -34,10 +34,10 @@ tpr_entity_live = function(id) {
   parsed =
     tibble(
       id = map_chr(parsed, pluck, "id", .default = NA_character_),
-      name = map_chr(parsed, pluck, "name", .default = NA_character_),
-      entityType = map_chr(parsed, pluck, "entityType", .default = NA_character_),
-      parkId = map_chr(parsed, pluck, "parkId", .default = NA_character_),
-      externalId = map_chr(parsed, pluck, "externalId", .default = NA_character_),
+      # name = map_chr(parsed, pluck, "name", .default = NA_character_),
+      # entityType = map_chr(parsed, pluck, "entityType", .default = NA_character_),
+      # parkId = map_chr(parsed, pluck, "parkId", .default = NA_character_),
+      # externalId = map_chr(parsed, pluck, "externalId", .default = NA_character_),
       queue = map(parsed, pluck, "queue", .default = NA),
       status = map_chr(parsed, pluck, "status", .default = NA_character_),
       forecast = map(parsed,pluck,"forecast", .default = NA),
