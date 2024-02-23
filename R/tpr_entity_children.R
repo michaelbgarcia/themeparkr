@@ -5,9 +5,10 @@
 #'
 #' @param park GUID or slug string for the entity of interest
 #' @importFrom httr modify_url GET content stop_for_status
-#' @importFrom purrr pluck map_dfr
+#' @importFrom purrr pluck map_dfr modify_at transpose
 #' @importFrom jsonlite fromJSON
-#' @importFrom dplyr any_of bind_rows mutate relocate everything
+#' @importFrom dplyr any_of bind_rows mutate relocate everything filter
+#' @importFrom tidyr unnest_longer pivot_wider
 #' @importFrom glue glue
 #'
 #' @return a tibble
@@ -31,9 +32,16 @@ tpr_entity_children = function(park) {
   parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
   parsed = parsed %>%
     purrr::pluck("children") %>%
+    purrr::map(.f = function(x) {
+      purrr::modify_at(x, "location", purrr::transpose)
+    }) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(park = park) %>%
-    dplyr::relocate(park, .before = dplyr::everything())
+    dplyr::relocate(park, .before = dplyr::everything()) %>%
+    tidyr::unnest_longer(location,values_to = "location",indices_to = "location_id") %>%
+    dplyr::filter(location_id %in% c("latitude","longitude")) %>%
+    dplyr::mutate(location = as.numeric(location)) %>%
+    tidyr::pivot_wider(names_from = "location_id", values_from = "location")
 
   return(parsed)
 }

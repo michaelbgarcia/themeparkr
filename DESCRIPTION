@@ -1,7 +1,7 @@
 Package: themeparkr
 Type: Package
 Title: R API Wrapper for the themeparksapi
-Version: 0.1.1
+Version: 0.1.2
 Author: Michael B. Garcia
 Maintainer: Michael B. Garcia <michaelbgarcia@gmail.com>
 Description: The package provides R functions to query real-time data for 
