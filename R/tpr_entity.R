@@ -30,7 +30,10 @@ tpr_entity = function(id) {
                               simplifyVector = FALSE)
   parsed = parsed %>%
     purrr::modify_if(is.list, list) %>%
-    tibble::as_tibble_row()
+    tibble::as_tibble() %>%
+    tidyr::unnest_longer(location,values_to = "location",indices_to = "location_id") %>%
+    dplyr::mutate(location = as.numeric(location)) %>%
+    tidyr::pivot_wider(names_from = "location_id", values_from = "location")
 
   return(parsed)
 }
