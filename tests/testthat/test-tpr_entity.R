@@ -7,3 +7,12 @@ test_that("tpr_entity() returns one row with numeric coordinates", {
   expect_type(out$latitude, "double")
   expect_type(out$longitude, "double")
 })
+
+test_that("tpr_entity() returns NA coordinates when location is missing", {
+  local_fixture("entity-no-location")
+  out = tpr_entity("ac44c594-ccfe-41af-9361-304c268c6da4")
+
+  expect_equal(nrow(out), 1)
+  expect_identical(out$latitude, NA_real_)
+  expect_identical(out$longitude, NA_real_)
+})

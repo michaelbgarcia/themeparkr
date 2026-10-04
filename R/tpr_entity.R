@@ -24,12 +24,10 @@
 tpr_entity = function(id) {
   path = glue::glue("v1/entity/{id}")
   parsed = tpr_fetch(path, "get details")
+  parsed = c(parsed[names(parsed) != "location"], tpr_location(parsed$location))
   parsed = parsed %>%
     purrr::modify_if(is.list, list) %>%
-    tibble::as_tibble() %>%
-    tidyr::unnest_longer(location,values_to = "location",indices_to = "location_id") %>%
-    dplyr::mutate(location = as.numeric(location)) %>%
-    tidyr::pivot_wider(names_from = "location_id", values_from = "location")
+    tibble::as_tibble()
 
   return(parsed)
 }
