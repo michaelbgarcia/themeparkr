@@ -19,8 +19,8 @@ tpr_entity = function(id) {
   path = glue::glue("v1/entity/{id}")
   parsed = tpr_fetch(path, "get details")
   parsed = c(parsed[names(parsed) != "location"], tpr_location(parsed$location))
-  parsed = parsed %>%
-    purrr::modify_if(is.list, list) %>%
+  parsed = parsed |>
+    purrr::modify_if(is.list, list) |>
     tibble::as_tibble()
 
   return(parsed)

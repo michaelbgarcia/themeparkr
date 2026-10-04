@@ -37,12 +37,12 @@ tpr_entity_children = function(id, park = lifecycle::deprecated()) {
       latitude = double(), longitude = double()
     ))
   }
-  parsed = children %>%
+  parsed = children |>
     purrr::map(.f = function(x) {
       c(x[names(x) != "location"], tpr_location(x$location))
-    }) %>%
-    dplyr::bind_rows() %>%
-    dplyr::mutate(park = !!id) %>%
+    }) |>
+    dplyr::bind_rows() |>
+    dplyr::mutate(park = !!id) |>
     dplyr::relocate(park, .before = dplyr::everything())
 
   return(parsed)

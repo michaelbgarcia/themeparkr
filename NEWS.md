@@ -12,7 +12,9 @@
 * `tpr_entity()` only keeps `latitude` and `longitude` from the API's
   `location` field.
 
-* Requires R >= 4.1.
+* Requires R >= 4.1.0. The package now uses the native pipe `|>` and no
+  longer depends on or re-exports magrittr's `%>%`; attach magrittr or dplyr
+  yourself if you relied on `themeparkr::%>%`.
 
 ## Bug fixes
 

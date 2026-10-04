@@ -16,9 +16,9 @@
 tpr_destinations = function() {
   path = "v1/destinations"
   parsed = tpr_fetch(path, "get destinations")
-  parsed = parsed %>%
-    purrr::flatten() %>%
-    dplyr::bind_rows() %>%
+  parsed = parsed |>
+    purrr::flatten() |>
+    dplyr::bind_rows() |>
     tidyr::unnest_wider(dplyr::any_of("parks"), names_sep = "_")
 
   return(parsed)

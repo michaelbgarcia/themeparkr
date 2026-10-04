@@ -2,10 +2,10 @@
 # `task` completes the error message, e.g. "Failed to get details."
 # Errors are reported against `call`, the exported function the user ran.
 tpr_fetch = function(path, task, call = rlang::caller_env()) {
-  req = httr2::request("https://api.themeparks.wiki") %>%
-    httr2::req_url_path(path) %>%
-    httr2::req_user_agent("themeparkr (https://github.com/michaelbgarcia/themeparkr)") %>%
-    httr2::req_timeout(30) %>%
+  req = httr2::request("https://api.themeparks.wiki") |>
+    httr2::req_url_path(path) |>
+    httr2::req_user_agent("themeparkr (https://github.com/michaelbgarcia/themeparkr)") |>
+    httr2::req_timeout(30) |>
     httr2::req_retry(max_tries = 3)
 
   resp = tryCatch(

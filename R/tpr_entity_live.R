@@ -26,7 +26,7 @@
 tpr_entity_live = function(id) {
   path = glue::glue("v1/entity/{id}/live")
   parsed = tpr_fetch(path, "get live data")
-  parsed = parsed %>%
+  parsed = parsed |>
     purrr::pluck("liveData")
   parsed =
     tibble::tibble(
