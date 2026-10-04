@@ -23,3 +23,21 @@ test_that("tpr_entity_children() returns a typed 0-row tibble when there are no 
   expect_type(out$latitude, "double")
   expect_type(out$longitude, "double")
 })
+
+test_that("tpr_entity_children() takes `id`", {
+  local_fixture("children-null-location")
+  out = tpr_entity_children(id = "38ca7997-883b-4ae8-a87c-69a74967d59e")
+
+  expect_equal(unique(out$park), "38ca7997-883b-4ae8-a87c-69a74967d59e")
+})
+
+test_that("tpr_entity_children(park) still works but is deprecated", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  local_fixture("children-null-location")
+
+  expect_warning(
+    out <- tpr_entity_children(park = "38ca7997-883b-4ae8-a87c-69a74967d59e"),
+    class = "lifecycle_warning_deprecated"
+  )
+  expect_equal(unique(out$park), "38ca7997-883b-4ae8-a87c-69a74967d59e")
+})

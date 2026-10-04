@@ -4,13 +4,15 @@
 \alias{tpr_entity_children}
 \title{Get entity children details}
 \usage{
-tpr_entity_children(park)
+tpr_entity_children(id, park = lifecycle::deprecated())
 }
 \arguments{
-\item{park}{GUID or slug string for the entity of interest}
+\item{id}{GUID or slug string for the entity of interest}
+
+\item{park}{`r lifecycle::badge("deprecated")` Use `id` instead.}
 }
 \value{
-A tibble with one row per child and columns `park` (the `park`
+A tibble with one row per child and columns `park` (the `id`
   argument), `id`, `name`, `entityType`, `externalId`, `parentId`, `slug`,
   and numeric `latitude` and `longitude` (`NA` when the API has no
   coordinates). Entities with no children return zero rows with the same
