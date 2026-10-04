@@ -10,9 +10,9 @@
 #'     \item{id}{Entity GUID.}
 #'     \item{status}{e.g. `"OPERATING"`, `"CLOSED"`.}
 #'     \item{queue, forecast, showtimes}{List-columns holding the nested API
-#'       data, or `NA` when the entity has none. For example, the standby wait
+#'       data, or `NULL` when the entity has none. For example, the standby wait
 #'       is `queue[[i]]$STANDBY$waitTime`.}
-#'     \item{lastUpdated}{ISO 8601 timestamp string.}
+#'     \item{lastUpdated}{When the API last updated the entry, as a UTC `POSIXct`.}
 #'   }
 #'
 #' @details
@@ -31,11 +31,13 @@ tpr_entity_live = function(id) {
   parsed =
     tibble::tibble(
       id = purrr::map_chr(parsed, purrr::pluck, "id", .default = NA_character_),
-      queue = purrr::map(parsed, purrr::pluck, "queue", .default = NA),
+      queue = purrr::map(parsed, purrr::pluck, "queue"),
       status = purrr::map_chr(parsed, purrr::pluck, "status", .default = NA_character_),
-      forecast = purrr::map(parsed, purrr::pluck, "forecast", .default = NA),
-      showtimes = purrr::map(parsed, purrr::pluck, "showtimes", .default = NA),
-      lastUpdated = purrr::map_chr(parsed, purrr::pluck, "lastUpdated", .default = NA_character_)
+      forecast = purrr::map(parsed, purrr::pluck, "forecast"),
+      showtimes = purrr::map(parsed, purrr::pluck, "showtimes"),
+      lastUpdated = tpr_datetime(
+        purrr::map_chr(parsed, purrr::pluck, "lastUpdated", .default = NA_character_)
+      )
     )
 
   return(parsed)

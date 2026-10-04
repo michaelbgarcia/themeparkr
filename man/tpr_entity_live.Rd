@@ -15,9 +15,9 @@ A tibble with one row per entity that has live data:
     \item{id}{Entity GUID.}
     \item{status}{e.g. `"OPERATING"`, `"CLOSED"`.}
     \item{queue, forecast, showtimes}{List-columns holding the nested API
-      data, or `NA` when the entity has none. For example, the standby wait
+      data, or `NULL` when the entity has none. For example, the standby wait
       is `queue[[i]]$STANDBY$waitTime`.}
-    \item{lastUpdated}{ISO 8601 timestamp string.}
+    \item{lastUpdated}{When the API last updated the entry, as a UTC `POSIXct`.}
   }
 }
 \description{
