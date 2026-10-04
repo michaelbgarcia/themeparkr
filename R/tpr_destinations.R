@@ -2,7 +2,6 @@
 #'
 #' @description Get a list of supported destinations available on 'https://api.themeparks.wiki/'.
 #'
-#' @importFrom httr modify_url GET content stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr flatten
 #' @importFrom tidyr unnest_wider

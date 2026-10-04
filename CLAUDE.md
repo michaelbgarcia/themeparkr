@@ -19,7 +19,7 @@ devtools::check()      # R CMD check (examples hit the live API, so network is r
 devtools::install()
 ```
 
-Tests never hit the network: `local_fixture("name")` (in `tests/testthat/helper-fixtures.R`) mocks `tpr_fetch()` to return `tests/testthat/fixtures/name.json`. To cover a new API shape, save a trimmed real response there with `curl`.
+Tests never hit the network: `local_fixture("name")` (in `tests/testthat/helper-fixtures.R`) mocks `tpr_fetch()` to return `tests/testthat/fixtures/name.json`. Tests of `tpr_fetch()` itself use `httr2::local_mocked_responses()`. To cover a new API shape, save a trimmed real response there with `curl`.
 
 ## Architecture
 
@@ -32,7 +32,7 @@ Each exported function lives in its own file under `R/` and maps 1:1 to an API e
 | `tpr_entity_children(park)` | `v1/entity/{id}/children` |
 | `tpr_entity_live(id)` | `v1/entity/{id}/live` |
 
-All follow the same pattern: build the path with `glue`, call the internal `tpr_fetch(path, task)` (`R/utils-fetch.R`: httr GET, `stop_for_status`, `jsonlite::fromJSON(..., simplifyVector = FALSE)`), then flatten the nested list into a tibble with purrr/dplyr/tidyr. Functions return a plain tibble.
+All follow the same pattern: build the path with `glue`, call the internal `tpr_fetch(path, task)` (`R/utils-fetch.R`: httr2 request with user agent, timeout and retry; HTTP errors become a `themeparkr_http_error` via `cli::cli_abort()` reported against the calling exported function; body parsed with `jsonlite::fromJSON(..., simplifyVector = FALSE)`), then flatten the nested list into a tibble with purrr/dplyr/tidyr. Functions return a plain tibble.
 
 Endpoint-specific reshaping worth knowing:
 - `tpr_entity` and `tpr_entity_children` replace the nested `location` field with numeric `latitude`, `longitude` columns via `tpr_location()` (`R/utils-location.R`); the API sometimes omits `location` or sends null coordinates, which become `NA`. `tpr_entity_children` also prepends a `park` column holding the input id, and returns a typed 0-row tibble for leaf entities.

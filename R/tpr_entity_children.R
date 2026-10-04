@@ -4,7 +4,6 @@
 #'     'https://api.themeparks.wiki/'.
 #'
 #' @param park GUID or slug string for the entity of interest
-#' @importFrom httr modify_url GET content stop_for_status
 #' @importFrom purrr pluck map_dfr
 #' @importFrom jsonlite fromJSON
 #' @importFrom dplyr any_of bind_rows mutate relocate everything

@@ -4,7 +4,6 @@
 #'     child entities on 'https://api.themeparks.wiki/'.
 #'
 #' @param id GUID or slug string for the entity of interest
-#' @importFrom httr modify_url GET content stop_for_status
 #' @importFrom purrr pluck map_chr map
 #' @importFrom jsonlite fromJSON
 #' @importFrom glue glue

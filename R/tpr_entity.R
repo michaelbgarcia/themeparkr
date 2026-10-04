@@ -4,7 +4,6 @@
 #'     You can supply either a GUID or slug string.
 #'
 #' @param id GUID or slug string for the entity of interest
-#' @importFrom httr modify_url GET content stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble_row
 #' @importFrom glue glue

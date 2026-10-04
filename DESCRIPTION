@@ -11,13 +11,15 @@ License: MIT + file LICENSE
 LazyData: true
 Imports: 
     magrittr,
-    httr,
     jsonlite,
     purrr,
     tidyr,
     dplyr,
     tibble,
-    glue
+    glue,
+    httr2 (>= 1.0.0),
+    cli,
+    rlang
 Depends: 
     R (>= 2.10)
 Suggests: 
