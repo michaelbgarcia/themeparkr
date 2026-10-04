@@ -21,10 +21,7 @@
 #' @export
 tpr_destinations = function() {
   path = "v1/destinations"
-  url = httr::modify_url("https://api.themeparks.wiki", path = path)
-  resp = httr::GET(url)
-  httr::stop_for_status(resp, "get destinations")
-  parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
+  parsed = tpr_fetch(path, "get destinations")
   parsed = parsed %>%
     purrr::flatten() %>%
     dplyr::bind_rows() %>%

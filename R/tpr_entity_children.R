@@ -26,10 +26,7 @@
 #' @export
 tpr_entity_children = function(park) {
   path = glue::glue("v1/entity/{park}/children")
-  url = httr::modify_url("https://api.themeparks.wiki", path = path)
-  resp = httr::GET(url)
-  httr::stop_for_status(resp, "get list of children")
-  parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
+  parsed = tpr_fetch(path, "get list of children")
   parsed = parsed %>%
     purrr::pluck("children") %>%
     purrr::map(.f = function(x) {

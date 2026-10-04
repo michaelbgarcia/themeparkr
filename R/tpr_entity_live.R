@@ -25,10 +25,7 @@
 #' @export
 tpr_entity_live = function(id) {
   path = glue::glue("v1/entity/{id}/live")
-  url = httr::modify_url("https://api.themeparks.wiki", path = path)
-  resp = httr::GET(url)
-  httr::stop_for_status(resp, "get live data")
-  parsed = jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = FALSE)
+  parsed = tpr_fetch(path, "get live data")
   parsed = parsed %>%
     purrr::pluck("liveData")
   parsed =

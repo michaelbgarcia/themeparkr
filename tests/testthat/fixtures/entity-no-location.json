@@ -1,0 +1,11 @@
+{
+  "id": "ac44c594-ccfe-41af-9361-304c268c6da4",
+  "name": "丛林秘境",
+  "parkId": "6f8764b7-172a-4fcf-8fec-10d3e44a55e4",
+  "parentId": "6f8764b7-172a-4fcf-8fec-10d3e44a55e4",
+  "timezone": "Asia/Shanghai",
+  "entityType": "ATTRACTION",
+  "destinationId": "38ca7997-883b-4ae8-a87c-69a74967d59e",
+  "attractionType": "RIDE",
+  "externalId": "attraction_31011053"
+}

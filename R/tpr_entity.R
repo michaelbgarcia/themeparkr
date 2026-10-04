@@ -23,11 +23,7 @@
 #' @export
 tpr_entity = function(id) {
   path = glue::glue("v1/entity/{id}")
-  url = httr::modify_url("https://api.themeparks.wiki", path = path)
-  resp = httr::GET(url)
-  httr::stop_for_status(resp, "get details")
-  parsed = jsonlite::fromJSON(httr::content(resp, "text"),
-                              simplifyVector = FALSE)
+  parsed = tpr_fetch(path, "get details")
   parsed = parsed %>%
     purrr::modify_if(is.list, list) %>%
     tibble::as_tibble() %>%

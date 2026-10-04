@@ -1,0 +1,44 @@
+{
+  "id": "38ca7997-883b-4ae8-a87c-69a74967d59e",
+  "name": "Chimelong International Ocean Tourist Resort",
+  "entityType": "DESTINATION",
+  "timezone": "Asia/Shanghai",
+  "children": [
+    {
+      "id": "18a2aeb2-7be5-4273-8cac-611ae5b519f6",
+      "name": "Chimelong Spaceship",
+      "entityType": "PARK",
+      "externalId": "park_ZH60",
+      "parentId": "38ca7997-883b-4ae8-a87c-69a74967d59e",
+      "slug": null,
+      "location": {
+        "longitude": 113.52986148818427,
+        "latitude": 22.09986599676263
+      }
+    },
+    {
+      "id": "6f8764b7-172a-4fcf-8fec-10d3e44a55e4",
+      "name": "Chimelong Ocean Kingdom",
+      "entityType": "PARK",
+      "externalId": "park_ZH56",
+      "parentId": "38ca7997-883b-4ae8-a87c-69a74967d59e",
+      "slug": null,
+      "location": {
+        "longitude": 113.52885806119738,
+        "latitude": 22.103865011701625
+      }
+    },
+    {
+      "id": "ac44c594-ccfe-41af-9361-304c268c6da4",
+      "name": "丛林秘境",
+      "entityType": "ATTRACTION",
+      "externalId": "attraction_31011053",
+      "parentId": "6f8764b7-172a-4fcf-8fec-10d3e44a55e4",
+      "slug": null,
+      "location": {
+        "longitude": null,
+        "latitude": null
+      }
+    }
+  ]
+}
