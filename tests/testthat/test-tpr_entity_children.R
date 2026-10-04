@@ -11,3 +11,15 @@ test_that("tpr_entity_children() keeps children with null coordinates as NA", {
   expect_identical(null_row$longitude, NA_real_)
   expect_equal(sum(is.na(out$latitude)), 1)
 })
+
+test_that("tpr_entity_children() returns a typed 0-row tibble when there are no children", {
+  local_fixture("children-empty")
+  out = tpr_entity_children("924a3b2c-6b4b-49e5-99d3-e9dc3f2e8a48")
+
+  expect_s3_class(out, "tbl_df")
+  expect_equal(nrow(out), 0)
+  expect_named(out, c("park", "id", "name", "entityType", "externalId",
+                      "parentId", "slug", "latitude", "longitude"))
+  expect_type(out$latitude, "double")
+  expect_type(out$longitude, "double")
+})

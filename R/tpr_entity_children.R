@@ -26,8 +26,17 @@
 tpr_entity_children = function(park) {
   path = glue::glue("v1/entity/{park}/children")
   parsed = tpr_fetch(path, "get list of children")
-  parsed = parsed %>%
-    purrr::pluck("children") %>%
+  children = purrr::pluck(parsed, "children")
+  # Leaf entities (e.g. a single ride) have no children
+  if (length(children) == 0) {
+    return(tibble::tibble(
+      park = character(), id = character(), name = character(),
+      entityType = character(), externalId = character(),
+      parentId = character(), slug = character(),
+      latitude = double(), longitude = double()
+    ))
+  }
+  parsed = children %>%
     purrr::map(.f = function(x) {
       c(x[names(x) != "location"], tpr_location(x$location))
     }) %>%
