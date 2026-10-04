@@ -13,11 +13,13 @@ Run from the repo root in R (`.Rprofile` activates `renv` automatically):
 ```r
 devtools::document()   # regenerate NAMESPACE and man/*.Rd from roxygen comments
 devtools::load_all()   # load package for interactive testing
+devtools::test()       # offline tests against recorded API responses
+devtools::test(filter = "tpr_entity_children")  # single test file
 devtools::check()      # R CMD check (examples hit the live API, so network is required)
 devtools::install()
 ```
 
-There is no `tests/` directory; verification is done by calling the exported functions against the live API.
+Tests never hit the network: `local_fixture("name")` (in `tests/testthat/helper-fixtures.R`) mocks `tpr_fetch()` to return `tests/testthat/fixtures/name.json`. To cover a new API shape, save a trimmed real response there with `curl`.
 
 ## Architecture
 
@@ -30,10 +32,10 @@ Each exported function lives in its own file under `R/` and maps 1:1 to an API e
 | `tpr_entity_children(park)` | `v1/entity/{id}/children` |
 | `tpr_entity_live(id)` | `v1/entity/{id}/live` |
 
-All follow the same pattern: build the URL with `httr::modify_url()` + `glue`, `httr::GET`, `httr::stop_for_status`, parse with `jsonlite::fromJSON(..., simplifyVector = FALSE)`, then flatten the nested list into a tibble with purrr/dplyr/tidyr. Functions return a plain tibble.
+All follow the same pattern: build the path with `glue`, call the internal `tpr_fetch(path, task)` (`R/utils-fetch.R`: httr GET, `stop_for_status`, `jsonlite::fromJSON(..., simplifyVector = FALSE)`), then flatten the nested list into a tibble with purrr/dplyr/tidyr. Functions return a plain tibble.
 
 Endpoint-specific reshaping worth knowing:
-- `tpr_entity` and `tpr_entity_children` unnest the nested `location` field and pivot it into numeric columns (children keeps only `latitude`/`longitude`). `tpr_entity_children` also prepends a `park` column holding the input id.
+- `tpr_entity` and `tpr_entity_children` replace the nested `location` field with numeric `latitude`, `longitude` columns via `tpr_location()` (`R/utils-location.R`); the API sometimes omits `location` or sends null coordinates, which become `NA`. `tpr_entity_children` also prepends a `park` column holding the input id, and returns a typed 0-row tibble for leaf entities.
 - `tpr_entity_live` builds the tibble column-by-column with `map_chr`/`map` + `pluck(.default = NA)` so missing fields don't break; `queue`, `forecast`, and `showtimes` stay as list-columns.
 
 ## Conventions
