@@ -1,0 +1,32 @@
+{
+  "destinations": [
+    {
+      "id": "b55f40bd-7f8b-4cf5-b3f5-c3c2a4927832",
+      "name": "Djurs Sommerland",
+      "slug": "djurs-sommerland-destination",
+      "externalId": "djurs-sommerland-destination",
+      "parks": [
+        {
+          "id": "90917f88-4774-46d9-8b5c-23e5b94e8ded",
+          "name": "Djurs Sommerland"
+        }
+      ]
+    },
+    {
+      "id": "314e42e5-95e7-448f-a127-01699a4fba04",
+      "name": "Six Flags St. Louis",
+      "slug": "sixflags_destination_SFSL",
+      "externalId": "enchantedparks_midamericaparks",
+      "parks": [
+        {
+          "id": "815e6367-9bbe-449e-a639-a093e216188f",
+          "name": "Mid-America Parks"
+        },
+        {
+          "id": "732d5299-cc15-49c3-ab8f-937c7290d0a2",
+          "name": "Hurricane Harbor"
+        }
+      ]
+    }
+  ]
+}

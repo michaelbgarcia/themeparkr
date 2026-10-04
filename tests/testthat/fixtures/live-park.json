@@ -1,0 +1,81 @@
+{
+  "id": "75ea578a-adc8-4116-a54d-dccb60765ef9",
+  "name": "Magic Kingdom Park",
+  "entityType": "PARK",
+  "timezone": "America/New_York",
+  "liveData": [
+    {
+      "id": "0aae716c-af13-4439-b638-d75fb1649df3",
+      "name": "Mad Tea Party",
+      "entityType": "ATTRACTION",
+      "parkId": "75ea578a-adc8-4116-a54d-dccb60765ef9",
+      "externalId": "80010162;entityType=Attraction",
+      "queue": {
+        "STANDBY": {
+          "waitTime": 5
+        },
+        "RETURN_TIME": {
+          "state": "AVAILABLE",
+          "returnEnd": "2026-10-04T13:20:00-04:00",
+          "returnStart": "2026-10-04T12:20:00-04:00"
+        }
+      },
+      "status": "OPERATING",
+      "forecast": [
+        {
+          "time": "2026-10-04T08:00:00-04:00",
+          "waitTime": 10,
+          "percentage": 8
+        },
+        {
+          "time": "2026-10-04T09:00:00-04:00",
+          "waitTime": 10,
+          "percentage": 8
+        }
+      ],
+      "operatingHours": [
+        {
+          "type": "Early Entry",
+          "endTime": "2026-10-04T08:00:00-04:00",
+          "startTime": "2026-10-04T07:30:00-04:00"
+        },
+        {
+          "type": "Operating",
+          "endTime": "2026-10-04T18:00:00-04:00",
+          "startTime": "2026-10-04T08:00:00-04:00"
+        },
+        {
+          "type": "Special Ticketed Event",
+          "endTime": "2026-10-05T00:00:00-04:00",
+          "startTime": "2026-10-04T18:30:00-04:00"
+        }
+      ],
+      "lastUpdated": "2026-10-04T16:14:57.225Z"
+    },
+    {
+      "id": "05ca3e51-580b-44ca-8046-7d3e57a6d248",
+      "name": "Disney’s Not-So-Spooky Spectacular at Mickey's Not-So-Scary Halloween Party",
+      "entityType": "SHOW",
+      "parkId": "75ea578a-adc8-4116-a54d-dccb60765ef9",
+      "externalId": "61265;entityType=Entertainment",
+      "status": "OPERATING",
+      "showtimes": [
+        {
+          "type": "Special Ticketed Event",
+          "endTime": "2026-10-04T22:00:00-04:00",
+          "startTime": "2026-10-04T22:00:00-04:00"
+        }
+      ],
+      "lastUpdated": "2026-10-04T04:01:54.709Z"
+    },
+    {
+      "id": "55bdcccc-217b-416c-b8b0-4b6a87d16179",
+      "name": "Cinderella's Royal Table",
+      "entityType": "RESTAURANT",
+      "parkId": "75ea578a-adc8-4116-a54d-dccb60765ef9",
+      "externalId": "90002464;entityType=restaurant",
+      "status": "OPERATING",
+      "lastUpdated": "2026-10-04T12:31:24.549Z"
+    }
+  ]
+}
