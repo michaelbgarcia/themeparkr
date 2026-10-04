@@ -4,20 +4,15 @@
 #'     You can supply either a GUID or slug string.
 #'
 #' @param id GUID or slug string for the entity of interest
-#' @importFrom jsonlite fromJSON
-#' @importFrom tibble as_tibble_row
-#' @importFrom glue glue
 #'
-#' @return a tibble
+#' @return A one-row tibble with the fields the API provides for the entity
+#'   (always `id`, `name`, `entityType`; often `slug`, `timezone`, `parentId`,
+#'   `parkId`, `destinationId`, `externalId`, and type-specific fields such as
+#'   `attractionType`), plus numeric `latitude` and `longitude` columns that are
+#'   `NA` when the API has no coordinates.
 #'
-#' @details
-#' This provides both the response and parsed results from the `/entity/{entityID}` path.
-#'
-#' @examples
-#' park_dest = tpr_destinations()$id[[1]]
-#' tpr_entity(park_dest)
-#'
-#'
+#' @examplesIf interactive()
+#' tpr_entity("waltdisneyworldresort")
 #'
 #' @export
 tpr_entity = function(id) {

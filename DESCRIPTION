@@ -1,27 +1,29 @@
 Package: themeparkr
 Type: Package
-Title: R API Wrapper for the themeparksapi
-Version: 0.1.3
-Author: Michael B. Garcia
-Maintainer: Michael B. Garcia <michaelbgarcia@gmail.com>
-Description: The package provides R functions to query real-time data for 
-    theme parks as documented on https://themeparks.wiki/.
-Encoding: UTF-8
+Title: Wrapper for the 'ThemeParks.wiki' API
+Version: 0.2.0
+Authors@R: 
+    person("Michael B.", "Garcia", , "michaelbgarcia@gmail.com", role = c("aut", "cre"))
+Description: Query real-time data for theme parks, such as destinations,
+    attractions, queue times and showtimes, from the 'ThemeParks.wiki' API
+    <https://api.themeparks.wiki/>.
 License: MIT + file LICENSE
-LazyData: true
+URL: https://github.com/michaelbgarcia/themeparkr
+BugReports: https://github.com/michaelbgarcia/themeparkr/issues
+Encoding: UTF-8
+Depends: 
+    R (>= 4.1)
 Imports: 
-    magrittr,
-    jsonlite,
-    purrr,
-    tidyr,
+    cli,
     dplyr,
-    tibble,
     glue,
     httr2 (>= 1.0.0),
-    cli,
-    rlang
-Depends: 
-    R (>= 2.10)
+    jsonlite,
+    magrittr,
+    purrr,
+    rlang,
+    tibble,
+    tidyr
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

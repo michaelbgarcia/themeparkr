@@ -4,22 +4,23 @@
 #'     child entities on 'https://api.themeparks.wiki/'.
 #'
 #' @param id GUID or slug string for the entity of interest
-#' @importFrom purrr pluck map_chr map
-#' @importFrom jsonlite fromJSON
-#' @importFrom glue glue
-#' @importFrom tibble tibble
 #'
-#' @return a tibble
+#' @return A tibble with one row per entity that has live data:
+#'   \describe{
+#'     \item{id}{Entity GUID.}
+#'     \item{status}{e.g. `"OPERATING"`, `"CLOSED"`.}
+#'     \item{queue, forecast, showtimes}{List-columns holding the nested API
+#'       data, or `NA` when the entity has none. For example, the standby wait
+#'       is `queue[[i]]$STANDBY$waitTime`.}
+#'     \item{lastUpdated}{ISO 8601 timestamp string.}
+#'   }
 #'
 #' @details
 #' This is recursive, so a destination will
-#'    return detais for all parks and all rides within those parks.
+#'    return details for all parks and all rides within those parks.
 #'
-#' @examples
-#' park_dest = tpr_destinations()$id[[1]]
-#' tpr_entity_live(park_dest)
-#'
-#'
+#' @examplesIf interactive()
+#' tpr_entity_live("waltdisneyworldresort")
 #'
 #' @export
 tpr_entity_live = function(id) {
@@ -28,17 +29,13 @@ tpr_entity_live = function(id) {
   parsed = parsed %>%
     purrr::pluck("liveData")
   parsed =
-    tibble(
-      id = map_chr(parsed, pluck, "id", .default = NA_character_),
-      # name = map_chr(parsed, pluck, "name", .default = NA_character_),
-      # entityType = map_chr(parsed, pluck, "entityType", .default = NA_character_),
-      # parkId = map_chr(parsed, pluck, "parkId", .default = NA_character_),
-      # externalId = map_chr(parsed, pluck, "externalId", .default = NA_character_),
-      queue = map(parsed, pluck, "queue", .default = NA),
-      status = map_chr(parsed, pluck, "status", .default = NA_character_),
-      forecast = map(parsed,pluck,"forecast", .default = NA),
-      showtimes = map(parsed, pluck, "showtimes", .default = NA),
-      lastUpdated = map_chr(parsed, pluck, "lastUpdated", .default = NA_character_)
+    tibble::tibble(
+      id = purrr::map_chr(parsed, purrr::pluck, "id", .default = NA_character_),
+      queue = purrr::map(parsed, purrr::pluck, "queue", .default = NA),
+      status = purrr::map_chr(parsed, purrr::pluck, "status", .default = NA_character_),
+      forecast = purrr::map(parsed, purrr::pluck, "forecast", .default = NA),
+      showtimes = purrr::map(parsed, purrr::pluck, "showtimes", .default = NA),
+      lastUpdated = purrr::map_chr(parsed, purrr::pluck, "lastUpdated", .default = NA_character_)
     )
 
   return(parsed)

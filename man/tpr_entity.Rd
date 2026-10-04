@@ -10,19 +10,18 @@ tpr_entity(id)
 \item{id}{GUID or slug string for the entity of interest}
 }
 \value{
-a tibble
+A one-row tibble with the fields the API provides for the entity
+  (always `id`, `name`, `entityType`; often `slug`, `timezone`, `parentId`,
+  `parkId`, `destinationId`, `externalId`, and type-specific fields such as
+  `attractionType`), plus numeric `latitude` and `longitude` columns that are
+  `NA` when the API has no coordinates.
 }
 \description{
 Get the full data document for a given entity from 'https://api.themeparks.wiki/'.
     You can supply either a GUID or slug string.
 }
-\details{
-This provides both the response and parsed results from the `/entity/{entityID}` path.
-}
 \examples{
-park_dest = tpr_destinations()$id[[1]]
-tpr_entity(park_dest)
-
-
-
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+tpr_entity("waltdisneyworldresort")
+\dontshow{\}) # examplesIf}
 }

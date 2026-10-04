@@ -10,7 +10,15 @@ tpr_entity_live(id)
 \item{id}{GUID or slug string for the entity of interest}
 }
 \value{
-a tibble
+A tibble with one row per entity that has live data:
+  \describe{
+    \item{id}{Entity GUID.}
+    \item{status}{e.g. `"OPERATING"`, `"CLOSED"`.}
+    \item{queue, forecast, showtimes}{List-columns holding the nested API
+      data, or `NA` when the entity has none. For example, the standby wait
+      is `queue[[i]]$STANDBY$waitTime`.}
+    \item{lastUpdated}{ISO 8601 timestamp string.}
+  }
 }
 \description{
 Get live data (queue times, parade times, etc.) as well as all
@@ -18,12 +26,10 @@ Get live data (queue times, parade times, etc.) as well as all
 }
 \details{
 This is recursive, so a destination will
-   return detais for all parks and all rides within those parks.
+   return details for all parks and all rides within those parks.
 }
 \examples{
-park_dest = tpr_destinations()$id[[1]]
-tpr_entity_live(park_dest)
-
-
-
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+tpr_entity_live("waltdisneyworldresort")
+\dontshow{\}) # examplesIf}
 }

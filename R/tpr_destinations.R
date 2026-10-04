@@ -1,21 +1,16 @@
 #' Get destinations
 #'
-#' @description Get a list of supported destinations available on 'https://api.themeparks.wiki/'.
+#' @description Get the list of destinations (resorts) supported by
+#'     'https://api.themeparks.wiki/', with the parks that belong to each.
 #'
-#' @importFrom jsonlite fromJSON
-#' @importFrom purrr flatten
-#' @importFrom tidyr unnest_wider
-#' @importFrom dplyr bind_rows any_of glimpse
+#' @return A tibble with one row per park:
+#'   \describe{
+#'     \item{id, name, slug, externalId}{The destination.}
+#'     \item{parks_id, parks_name}{A park within that destination.}
+#'   }
 #'
-#' @return a tibble
-#'
-#' @details
-#' This provides both the response and parsed results from the `/destinations` path.
-#'
-#' @examples
+#' @examplesIf interactive()
 #' tpr_destinations()
-#'
-#'
 #'
 #' @export
 tpr_destinations = function() {

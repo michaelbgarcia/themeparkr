@@ -5,3 +5,4 @@
 ^inst/scratch
 ^LICENSE\.md$
 ^data-raw$
+^CLAUDE\.md$

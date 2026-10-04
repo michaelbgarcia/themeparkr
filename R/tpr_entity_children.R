@@ -1,25 +1,22 @@
 #' Get entity children details
 #'
-#' @description Get a list of all the children that belong an entity on
+#' @description Get a list of all the children that belong to an entity on
 #'     'https://api.themeparks.wiki/'.
 #'
 #' @param park GUID or slug string for the entity of interest
-#' @importFrom purrr pluck map_dfr
-#' @importFrom jsonlite fromJSON
-#' @importFrom dplyr any_of bind_rows mutate relocate everything
-#' @importFrom glue glue
 #'
-#' @return a tibble
+#' @return A tibble with one row per child and columns `park` (the `park`
+#'   argument), `id`, `name`, `entityType`, `externalId`, `parentId`, `slug`,
+#'   and numeric `latitude` and `longitude` (`NA` when the API has no
+#'   coordinates). Entities with no children return zero rows with the same
+#'   columns.
 #'
 #' @details
 #' This is recursive, so a destination will
 #'    return all parks and all rides within those parks.
 #'
-#' @examples
-#' park_dest = tpr_destinations()$id[[1]]
-#' tpr_entity_children(park_dest)
-#'
-#'
+#' @examplesIf interactive()
+#' tpr_entity_children("waltdisneyworldresort")
 #'
 #' @export
 tpr_entity_children = function(park) {

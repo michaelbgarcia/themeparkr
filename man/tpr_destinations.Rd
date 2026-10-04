@@ -7,17 +7,18 @@
 tpr_destinations()
 }
 \value{
-a tibble
+A tibble with one row per park:
+  \describe{
+    \item{id, name, slug, externalId}{The destination.}
+    \item{parks_id, parks_name}{A park within that destination.}
+  }
 }
 \description{
-Get a list of supported destinations available on 'https://api.themeparks.wiki/'.
-}
-\details{
-This provides both the response and parsed results from the `/destinations` path.
+Get the list of destinations (resorts) supported by
+    'https://api.themeparks.wiki/', with the parks that belong to each.
 }
 \examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 tpr_destinations()
-
-
-
+\dontshow{\}) # examplesIf}
 }
